@@ -63,53 +63,16 @@ void MainWindow::readSerial()
         QString str(tmp);
 
 
-        ui->listWidget_2->addItem(str);
+        //ui->listWidget_2->addItem(str);
     }
 
 }
 
-void MainWindow::on_verticalSlider_valueChanged(int value)
-{
-
-}
 
 void MainWindow::WriteData()
 {
     port.write(buf);
     port.flush();
-}
-
-
-
-void MainWindow::on_verticalSlider_sliderMoved(int position)
-{
-    buf[0] =128- ui->verticalSlider->sliderPosition();
-    WriteData();
-}
-
-void MainWindow::on_verticalSlider_sliderReleased()
-{
-
-}
-
-void MainWindow::on_verticalSlider_2_sliderReleased()
-{
-
-}
-
-void MainWindow::on_verticalSlider_3_sliderReleased()
-{
-
-}
-
-void MainWindow::on_verticalSlider_4_sliderReleased()
-{
-
-}
-
-void MainWindow::on_verticalSlider_5_sliderReleased()
-{
-
 }
 
 void MainWindow::blink()
@@ -135,6 +98,19 @@ void MainWindow::on_blinkButton_clicked()
 void MainWindow::on_stopButton_clicked()
 {
     tmr->stop();
+    buf[0] = 115;buf[1]=115;buf[2]=115;buf[3]=115;buf[4]=115;
+    WriteData();
+    ui->verticalSlider->setValue(13);
+    ui->verticalSlider_2->setValue(13);
+    ui->verticalSlider_3->setValue(13);
+    ui->verticalSlider_4->setValue(13);
+    ui->verticalSlider_5->setValue(13);
+}
+
+void MainWindow::on_verticalSlider_sliderMoved(int position)
+{
+    buf[0] =128- ui->verticalSlider->sliderPosition();
+    WriteData();
 }
 
 void MainWindow::on_verticalSlider_2_sliderMoved(int position)
